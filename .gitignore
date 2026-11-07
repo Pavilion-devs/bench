@@ -5,3 +5,9 @@ __pycache__/
 .bench/
 .pytest_cache/
 *.mp4
+video/hf/assets/
+video/hf/renders/
+video/hf/index.html
+video/hf/compositions/
+video/hf/render.log
+video/vo/

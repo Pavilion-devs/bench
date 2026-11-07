@@ -1,0 +1,11 @@
+{
+ "s1": "Every team using coding agents asks the same question. Which agent should do this job? Bench answers it on your own tickets, right in team chat.",
+ "s2a": "A ticket comes in. Bench's tickets are real bugs from public repos, with the code from just before the fix, and the fix's own tests kept hidden.",
+ "s2b": "Everything runs on Switch. The Referee opens a sealed room for each candidate, Claude Code and Codex, so nobody can copy. The job itself is an exclusive room role, called fixer.",
+ "s2c": "The Referee is deterministic code, not a model. It runs the hidden tests in a Docker sandbox with no network, then ranks by tests passed, size, and speed.",
+ "s2d": "A person picks the winner in chat. And if the holder goes down, the runner-up takes over, and gets the work it missed.",
+ "s3": "Here's a real run, replayed in Switch Console. The ticket lands, and the Referee starts a sealed tryout. The commits are exactly what Claude Code and Codex wrote. Both pass all ten hidden tests. Claude ranks first. Same size, and faster.",
+ "s4": "A person replies. Pick replay claude. The Referee moves the fixer role, and checks it with Switch. One second later, Claude holds fixer, and answers the next message.",
+ "s5": "Now we kill Claude, with a message still waiting. Six seconds later, the Referee sees the empty seat, hands fixer to Codex, and re-sends the missed message. Nobody changed how they work.",
+ "s6": "We ran it live too, with real agents on Switch Console. On a real more-itertools bug, Claude passed all six hundred and eight hidden tests. Replay the whole demo with one command. No API keys."
+}
