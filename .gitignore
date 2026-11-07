@@ -4,3 +4,4 @@ __pycache__/
 .venv/
 .bench/
 .pytest_cache/
+*.mp4
