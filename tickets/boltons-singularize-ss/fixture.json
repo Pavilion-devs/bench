@@ -1,0 +1,8 @@
+{
+  "source": "https://github.com/mahmoud/boltons",
+  "fix": "1e61524a798ea73632029a013a7686036d5c126f",
+  "fixed_in": "https://github.com/mahmoud/boltons/commit/1e61524a798ea73632029a013a7686036d5c126f",
+  "hidden_tests": ["tests/test_strutils.py"],
+  "import_paths": ["."],
+  "license": "BSD-3-Clause"
+}

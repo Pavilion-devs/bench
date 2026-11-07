@@ -1,0 +1,216 @@
+{
+  "run": "62704b",
+  "switch_version": "0.31.0",
+  "room": {
+    "room_id": "44022dfe-076a-469d-b320-a4ce23f9b6dc"
+  },
+  "move_role": {
+    "role_operations_and_args": {
+      "list_roles": [],
+      "get_role_detail": [
+        "room_id",
+        "role_name"
+      ],
+      "define_role": [
+        "name",
+        "instructions",
+        "exclusive"
+      ],
+      "edit_role": [
+        "name",
+        "instructions",
+        "exclusive"
+      ],
+      "delete_role": [
+        "name"
+      ],
+      "assume_role": [
+        "role"
+      ],
+      "release_role": []
+    },
+    "second_assume_while_held": {
+      "status": 400,
+      "body": {
+        "detail": "Role 'fixer' is exclusive and currently held by another agent"
+      }
+    },
+    "holders": [
+      "bench-a-62704b"
+    ]
+  },
+  "graceful_handoff": {
+    "seconds": 0.053,
+    "assume_status": 200,
+    "role_instructions_returned": {
+      "role": "fixer",
+      "instructions": "You fix tickets."
+    },
+    "holders": [
+      "bench-b-62704b"
+    ],
+    "target_statuses": {
+      "bench-b-62704b": "live"
+    },
+    "before": {
+      "a_addressed": [
+        true
+      ],
+      "b_addressed": [
+        false
+      ]
+    },
+    "after": {
+      "a_addressed": [
+        false
+      ],
+      "b_addressed": [
+        true
+      ]
+    }
+  },
+  "failure_timing": {
+    "samples": [
+      {
+        "failure": "kill -9",
+        "referee_saw_free_s": 5.11,
+        "standby_took_over_s": 5.13,
+        "refused_attempts": 17,
+        "holders_after": [
+          "bench-b-62704b"
+        ]
+      },
+      {
+        "failure": "kill -9",
+        "referee_saw_free_s": 5.1,
+        "standby_took_over_s": 5.13,
+        "refused_attempts": 17,
+        "holders_after": [
+          "bench-b-62704b"
+        ]
+      },
+      {
+        "failure": "kill -9",
+        "referee_saw_free_s": 5.05,
+        "standby_took_over_s": 5.07,
+        "refused_attempts": 17,
+        "holders_after": [
+          "bench-b-62704b"
+        ]
+      },
+      {
+        "failure": "kill -9",
+        "referee_saw_free_s": 5.06,
+        "standby_took_over_s": 5.07,
+        "refused_attempts": 17,
+        "holders_after": [
+          "bench-b-62704b"
+        ]
+      },
+      {
+        "failure": "kill -9",
+        "referee_saw_free_s": 5.09,
+        "standby_took_over_s": 5.11,
+        "refused_attempts": 17,
+        "holders_after": [
+          "bench-b-62704b"
+        ]
+      },
+      {
+        "failure": "frozen (SIGSTOP)",
+        "referee_saw_free_s": 5.06,
+        "standby_took_over_s": 5.09,
+        "refused_attempts": 17,
+        "holders_after": [
+          "bench-b-62704b"
+        ]
+      },
+      {
+        "failure": "frozen (SIGSTOP)",
+        "referee_saw_free_s": 5.08,
+        "standby_took_over_s": 5.11,
+        "refused_attempts": 17,
+        "holders_after": [
+          "bench-b-62704b"
+        ]
+      },
+      {
+        "failure": "frozen (SIGSTOP)",
+        "referee_saw_free_s": 5.16,
+        "standby_took_over_s": 5.18,
+        "refused_attempts": 17,
+        "holders_after": [
+          "bench-b-62704b"
+        ]
+      }
+    ],
+    "takeover_s": {
+      "min": 5.07,
+      "median": 5.11,
+      "max": 5.18
+    },
+    "succeeded": "8/8"
+  },
+  "messages_during_gap": {
+    "seconds_until_free": 5.15,
+    "assume_status": 200,
+    "sent_to_dead_holder_statuses": {
+      "bench-a-62704b": "live"
+    },
+    "sent_to_empty_seat_statuses": {},
+    "sent_after_takeover_statuses": {
+      "bench-b-62704b": "live"
+    },
+    "sent_to_dead_holder": {
+      "seen_on_standby_stream": true,
+      "addressed_flag": [
+        false
+      ],
+      "in_read_context": true
+    },
+    "sent_to_empty_seat": {
+      "seen_on_standby_stream": true,
+      "addressed_flag": [
+        false
+      ],
+      "in_read_context": true
+    },
+    "sent_after_takeover": {
+      "seen_on_standby_stream": true,
+      "addressed_flag": [
+        true
+      ],
+      "in_read_context": true
+    }
+  },
+  "race": {
+    "rounds": 20,
+    "both_got_200": 19,
+    "rounds_with_two_holders": 17
+  },
+  "single_promotion": {
+    "rounds": 20,
+    "failed_assumes": 0,
+    "rounds_without_exactly_one_holder": 0
+  },
+  "person_mentions_role": {
+    "reached_holder": true,
+    "addressed_flag": [
+      false
+    ],
+    "sample_payload": {
+      "addressed": false,
+      "sender": "@switch-mattermost-591e4b84-8155-4106-bb1f-69c465fe6861-user:localhost",
+      "sender_name": "user",
+      "sender_kind": null,
+      "on_behalf_of": null,
+      "message_id": "sw_df6312cd316ae88885310c0e081a109d",
+      "body": "@fixer please look at person-554b7e",
+      "timestamp": 1794000026283,
+      "thread_id": null,
+      "attachments": [],
+      "opening_message": null,
+      "sender_role": null
+    }
+  }
+}

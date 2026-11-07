@@ -1,0 +1,99 @@
+diff --git a/more_itertools/more.py b/more_itertools/more.py
+index d435c2e..ab9d798 100755
+--- a/more_itertools/more.py
++++ b/more_itertools/more.py
+@@ -658,13 +658,17 @@ def one(iterable, too_short=None, too_long=None):
+     iterator = iter(iterable)
+     for first in iterator:
+         for second in iterator:
++            if too_long is not None:
++                raise too_long
+             msg = (
+                 f'Expected exactly one item in iterable, but got {first!r}, '
+                 f'{second!r}, and perhaps more.'
+             )
+-            raise too_long or ValueError(msg)
++            raise ValueError(msg)
+         return first
+-    raise too_short or ValueError('too few items in iterable (expected 1)')
++    if too_short is not None:
++        raise too_short
++    raise ValueError('too few items in iterable (expected 1)')
+ 
+ 
+ def raise_(exception, *args):
+@@ -3681,11 +3685,13 @@ def only(iterable, default=None, too_long=None):
+     iterator = iter(iterable)
+     for first in iterator:
+         for second in iterator:
++            if too_long is not None:
++                raise too_long
+             msg = (
+                 f'Expected exactly one item in iterable, but got {first!r}, '
+                 f'{second!r}, and perhaps more.'
+             )
+-            raise too_long or ValueError(msg)
++            raise ValueError(msg)
+         return first
+     return default
+ 
+diff --git a/tests/test_more.py b/tests/test_more.py
+index cc412ff..0a733ea 100644
+--- a/tests/test_more.py
++++ b/tests/test_more.py
+@@ -761,6 +761,16 @@ class SizedIteratorTests(TestCase):
+         self.assertListEqual(list(sized_gen), list(range(3)))
+ 
+ 
++class _FalsyError(Exception):
++    def __bool__(self):
++        return False
++
++
++class _BadRepr:
++    def __repr__(self):
++        raise RuntimeError('repr should not be called')
++
++
+ class OneTests(TestCase):
+     def test_basic(self):
+         it = iter(['item'])
+@@ -791,6 +801,21 @@ class OneTests(TestCase):
+             lambda: mi.one(it),
+         )
+ 
++    def test_falsy_custom_exceptions(self):
++        too_short = _FalsyError('short')
++        with self.assertRaises(_FalsyError) as cm:
++            mi.one([], too_short=too_short)
++        self.assertIs(cm.exception, too_short)
++
++        too_long = _FalsyError('long')
++        with self.assertRaises(_FalsyError) as cm:
++            mi.one([1, 2], too_long=too_long)
++        self.assertIs(cm.exception, too_long)
++
++    def test_too_long_skips_repr(self):
++        with self.assertRaises(OverflowError):
++            mi.one([_BadRepr(), _BadRepr()], too_long=OverflowError)
++
+ 
+ class IntersperseTest(TestCase):
+     """Tests for intersperse()"""
+@@ -4385,6 +4410,16 @@ class OnlyTests(TestCase):
+             lambda: mi.only(['foo', 'bar', 'baz']),
+         )
+ 
++    def test_falsy_custom_exception(self):
++        too_long = _FalsyError('long')
++        with self.assertRaises(_FalsyError) as cm:
++            mi.only([1, 2], too_long=too_long)
++        self.assertIs(cm.exception, too_long)
++
++    def test_too_long_skips_repr(self):
++        with self.assertRaises(OverflowError):
++            mi.only([_BadRepr(), _BadRepr()], too_long=OverflowError)
++
+ 
+ class IchunkedTests(TestCase):
+     def test_even(self):

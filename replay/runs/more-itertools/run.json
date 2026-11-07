@@ -1,0 +1,22 @@
+{
+  "name": "more-itertools",
+  "ticket": "more-itertools-falsy-exception",
+  "recorded": "Switch Console, Nov 7 2026 16:40, real Claude Code and Codex agents",
+  "tryout": "T-60b07f",
+  "candidates": [
+    {
+      "name": "claude",
+      "recorded_as": "bench-claude",
+      "seconds": 54,
+      "message": "Raise custom too_short/too_long exceptions in one() and only() even when falsy",
+      "patch": "claude.patch"
+    },
+    {
+      "name": "codex",
+      "recorded_as": "bench-codex",
+      "seconds": null,
+      "message": null,
+      "patch": null
+    }
+  ]
+}

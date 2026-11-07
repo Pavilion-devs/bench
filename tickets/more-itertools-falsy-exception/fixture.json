@@ -1,0 +1,8 @@
+{
+  "source": "https://github.com/more-itertools/more-itertools",
+  "fix": "def2dabea858b6ecb84ee0c52e6e07929f2c409c",
+  "fixed_in": "https://github.com/more-itertools/more-itertools/commit/def2dabea858b6ecb84ee0c52e6e07929f2c409c",
+  "hidden_tests": ["tests/test_more.py"],
+  "import_paths": ["."],
+  "license": "MIT"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "sample-invoice",
+  "ticket": "sample-invoice",
+  "recorded": "Switch Console, Nov 7 2026 14:24, real Claude Code and Codex agents",
+  "tryout": "T-06213d",
+  "candidates": [
+    {
+      "name": "claude",
+      "recorded_as": "bench-claude",
+      "seconds": 32,
+      "message": "Round invoice totals half-up to the cent",
+      "patch": "claude.patch"
+    },
+    {
+      "name": "codex",
+      "recorded_as": "bench-codex",
+      "seconds": 79,
+      "message": "Fix invoice totals to round half-up using decimal arithmetic",
+      "patch": "codex.patch"
+    }
+  ]
+}

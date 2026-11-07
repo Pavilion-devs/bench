@@ -1,0 +1,2 @@
+ticket: strutils.singularize() chops the last letter off words ending in "ss"
+singularize('glass') returns 'glas', and 'boss', 'class', 'kiss', 'address' get the same treatment. These words are already singular. It also means singularize isn't stable: its own docstring says singularize('Glasses') == 'Glass', but running singularize again on 'Glass' gives 'Glas'. Real plurals like 'glasses' and 'addresses' must still work, and the word's capitalisation should be kept. See boltons/strutils.py.

@@ -1,0 +1,57 @@
+{
+  "run": "aefbd2",
+  "1_default_policy": {
+    "holder": [
+      "bench-a-aefbd2"
+    ],
+    "addressed": {
+      "a": [
+        false
+      ],
+      "b": [
+        false
+      ]
+    }
+  },
+  "2_policy_set_open": {
+    "a": 200,
+    "b": 200
+  },
+  "3_open_policy": {
+    "holder": [
+      "bench-a-aefbd2"
+    ],
+    "addressed": {
+      "a": [
+        true
+      ],
+      "b": [
+        false
+      ]
+    }
+  },
+  "4_after_handoff_to_b": {
+    "holder": [
+      "bench-b-aefbd2"
+    ],
+    "addressed": {
+      "a": [
+        false
+      ],
+      "b": [
+        true
+      ]
+    }
+  },
+  "5_after_kill_failover_to_a": {
+    "takeover_s": 4.7,
+    "holder": [
+      "bench-a-aefbd2"
+    ],
+    "addressed": {
+      "a": [
+        true
+      ]
+    }
+  }
+}

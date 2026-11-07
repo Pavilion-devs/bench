@@ -1,0 +1,2 @@
+ticket: one() and only() ignore a custom exception whose instances are falsy
+If you pass too_long= or too_short= an exception object that is falsy (an Exception subclass with __bool__ returning False), one() and only() raise their default ValueError instead of your exception. Also, when you give too_long, they still build the default error message, which calls repr() on the first items; a broken __repr__ there can hide the exception you asked for. Your exception should always be raised as given. See more_itertools/more.py.

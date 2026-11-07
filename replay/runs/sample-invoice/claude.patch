@@ -1,0 +1,55 @@
+diff --git a/invoice/totals.py b/invoice/totals.py
+index 5a33ffc..26a76b4 100644
+--- a/invoice/totals.py
++++ b/invoice/totals.py
+@@ -1,11 +1,24 @@
+ """Invoice totals for the payments service."""
+ 
++from decimal import Decimal, ROUND_HALF_UP
++
++CENT = Decimal("0.01")
++
++
++def _to_decimal(value):
++    # Go through str() so a float like 2.675 is read as written, not as its
++    # binary approximation 2.67499999...
++    return value if isinstance(value, Decimal) else Decimal(str(value))
++
+ 
+ def line_total(quantity, unit_price):
+     return quantity * unit_price
+ 
+ 
+ def invoice_total(lines, tax_rate=0.0):
+-    """Sum of line totals plus tax, rounded to cents."""
+-    subtotal = sum(line_total(q, p) for q, p in lines)
+-    return round(subtotal * (1 + tax_rate), 2)
++    """Sum of line totals plus tax, rounded half-up to cents."""
++    subtotal = sum(
++        (_to_decimal(q) * _to_decimal(p) for q, p in lines), Decimal("0")
++    )
++    total = subtotal * (1 + _to_decimal(tax_rate))
++    return float(total.quantize(CENT, rounding=ROUND_HALF_UP))
+diff --git a/tests/test_totals.py b/tests/test_totals.py
+index c27806b..298f0b9 100644
+--- a/tests/test_totals.py
++++ b/tests/test_totals.py
+@@ -7,3 +7,18 @@ def test_line_total():
+ 
+ def test_invoice_total_without_tax():
+     assert invoice_total([(1, 10.0), (2, 2.5)]) == 15.0
++
++
++def test_invoice_total_rounds_half_cent_up():
++    assert invoice_total([(1, 2.675)]) == 2.68
++    assert invoice_total([(1, 1.005)]) == 1.01
++    assert invoice_total([(1, 0.125)]) == 0.13
++
++
++def test_invoice_total_rounds_half_cent_up_after_tax():
++    # 2.50 * 1.07 = 2.675 exactly
++    assert invoice_total([(1, 2.5)], tax_rate=0.07) == 2.68
++
++
++def test_invoice_total_rounds_below_half_down():
++    assert invoice_total([(1, 2.674)]) == 2.67

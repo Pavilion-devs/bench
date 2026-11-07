@@ -1,0 +1,9 @@
+{
+  "source": "https://github.com/python-humanize/humanize",
+  "fix": "823ad6096e1e5ba82ea876ce761fc2efebd76157",
+  "fixed_in": "https://github.com/python-humanize/humanize/commit/823ad6096e1e5ba82ea876ce761fc2efebd76157",
+  "hidden_tests": ["tests/test_filesize.py"],
+  "import_paths": ["src"],
+  "add_files": {"src/humanize/_version.py": "__version__ = \"0+bench\"\n"},
+  "license": "MIT"
+}
